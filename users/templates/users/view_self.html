@@ -1,0 +1,116 @@
+{% extends "users/homebase.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block nav_content %}
+<li class="nav-item ">
+    <a class="nav-link" href="{% url 'home' %}">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item">
+    <a class="nav-link active" href="#">View self</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link disabled" href="#">Disabled</a>
+</li>
+{% endblock nav_content %}
+{% block content %}
+<h1>Details of {{ur.sid}}</h1>
+<div class="cal-container">
+    <div class="calendar">
+        <div class="calendar-header">
+            <span class="month-picker" id="month-picker">April</span>
+            <div class="year-picker">
+                <span class="year-change" id="prev-year">
+                    <pre><</pre>
+                </span>
+                <span id="year">2022</span>
+                <span class="year-change" id="next-year">
+                    <pre>></pre>
+                </span>
+            </div>
+        </div>
+        <div class="calendar-body">
+            <div class="calendar-week-day">
+                <div>Sun</div>
+                <div>Mon</div>
+                <div>Tue</div>
+                <div>Wed</div>
+                <div>Thu</div>
+                <div>Fri</div>
+                <div>Sat</div>
+            </div>
+            <div class="calendar-days"></div>
+        </div>
+
+        <div class="month-list"></div>
+    </div>
+</div>
+<ul class="nav nav-tabs" id="myTab" role="tablist">
+    <li class="nav-item">
+        <a class="nav-link active" id="cls-tab" data-toggle="tab" href="#cls" role="tab" aria-controls="cls"
+           aria-selected="true">CLS Add</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" id="ccls-tab" data-toggle="tab" href="#ccls" role="tab" aria-controls="ccls"
+           aria-selected="false">CCLS Add</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link " id="sls-tab" data-toggle="tab" href="#sls" role="tab" aria-controls="sls"
+           aria-selected="false">SLS Add</a>
+    </li>
+</ul>
+<div class="tab-content" id="myTabContent">
+    <div class="tab-pane fade show active" id="cls" role="tabpanel" aria-labelledby="cls-tab">
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <!--legend class="border-bottom mb-4">Log In</legend-->
+                    {{ cls_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-warning" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="ccls" role="tabpanel" aria-labelledby="ccls-tab">
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <!--legend class="border-bottom mb-4">Log In</legend-->
+                    {{ ccls_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-warning" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <div class="tab-pane fade" id="sls" role="tabpanel" aria-labelledby="sls-tab">
+        <div class="content-section">
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <!--legend class="border-bottom mb-4">Log In</legend-->
+                    {{ sls_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-warning" type="submit">Add</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+<link rel="stylesheet" href="{% static 'cal.css' %}">
+
+<script>
+let str = `{{data|safe}}`
+let data = JSON.parse(str)
+let cls_list = data["cls_list"]
+let ccls_list = data["ccls_list"]
+let sls_list = data["sls_list"]
+
+</script>
+<script src="{% static 'cal.js' %}"></script>
+{% endblock content %}
