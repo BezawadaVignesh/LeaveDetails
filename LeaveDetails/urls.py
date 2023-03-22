@@ -28,6 +28,7 @@ urlpatterns = [
     path('users/logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', user_views.home, name='home'),
     path('view_self/', user_views.view_self, name='view_self'),
+    path('remove_leave/', user_views.remove_leave, name='remove_leave'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 if settings.DEBUG:

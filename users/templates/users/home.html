@@ -6,10 +6,10 @@
       <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="{% url 'view_self' %}">View self</a>
+      <a class="nav-link" href="{% url 'view_self' %}?sid={{ user.sid }}">View self</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link disabled" href="#">Disabled</a>
+      <a class="nav-link" href="{% url 'remove_leave' %}?sid={{ user.sid }}">Remove Leaves</a>
     </li>
 {% endblock nav_content %}
 {% block content %}

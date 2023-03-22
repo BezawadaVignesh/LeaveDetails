@@ -32,7 +32,6 @@
     box-sizing: border-box;
 }
 
-html,
 .cal-container {
     padding: 20px;
     display: grid;
@@ -59,7 +58,7 @@ html,
     display: flex;
     justify-content: space-between;
     align-items: center;
-    font-size: 25px;
+    font-size: 20px;
     font-weight: 600;
     color: var(--color-txt);
     padding: 10px;
@@ -90,8 +89,8 @@ html,
 }
 
 .calendar-days div {
-    width: 50px;
-    height: 50px;
+    width: 40px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -165,6 +164,13 @@ html,
     transition-delay: 0.6s;
 }
 
+.calendar-days div.curr-date,
+.calendar-days div.curr-date:hover {
+    background-color: var(--blue);
+    color: var(--white);
+    border-radius: 50%;
+}
+
 .calendar-days div.cl-date,
 .calendar-days div.cl-date:hover {
     background-color: var(--clleaves);
@@ -179,14 +185,7 @@ html,
 }
 .calendar-days div.sl-date,
 .calendar-days div.sl-date:hover {
-    background-color: #F464C4;
-    color: var(--white);
-    border-radius: 50%;
-}
-
-.calendar-days div.curr-date,
-.calendar-days div.curr-date:hover {
-    background-color: var(--blue);
+    background-color: var(--slleaves);
     color: var(--white);
     border-radius: 50%;
 }

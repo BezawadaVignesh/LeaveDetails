@@ -57,11 +57,11 @@
             <form method="POST">
                 {% csrf_token %}
                 <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">ADD leaves</legend>
+                    <legend class="border-bottom mb-4">Remove leaves</legend>
                     {{ l_form|crispy }}
                 </fieldset>
                 <div class="form-group">
-                    <button class="btn btn-outline-info button-bg-color" type="submit">Add</button>
+                    <button class="btn btn-outline-info button-bg-color" type="submit">Remove</button>
                 </div>
             </form>
             </div>

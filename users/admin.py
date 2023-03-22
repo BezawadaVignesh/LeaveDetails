@@ -31,6 +31,29 @@ class CustomUserAdmin(UserAdmin):
 
 admin.site.register(CustomUser, CustomUserAdmin)
 
-admin.site.register(CLS)
-admin.site.register(CCLS)
-admin.site.register(SLS)
+
+@admin.register(CLS)
+class CLSAdmin(admin.ModelAdmin):
+    list_display = ('user', 'on_date')
+    list_filter = ('on_date', 'user',)
+
+    search_fields = ('user', 'on_date',)
+    ordering = ('on_date', 'user',)
+
+
+@admin.register(CCLS)
+class CCLSAdmin(admin.ModelAdmin):
+    list_display = ('user', 'on_date')
+    list_filter = ('on_date', 'user',)
+
+    search_fields = ('user', 'on_date',)
+    ordering = ('on_date', 'user',)
+
+
+@admin.register(SLS)
+class SLSAdmin(admin.ModelAdmin):
+    list_display = ('user', 'on_date')
+    list_filter = ('on_date', 'user',)
+
+    search_fields = ('user', 'on_date',)
+    ordering = ('on_date', 'user',)

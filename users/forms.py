@@ -3,6 +3,14 @@ from django import forms
 from .models import CustomUser, CLS, CCLS, SLS
 
 
+
+class LeaveRequestForm(forms.Form):
+    class DateInput(forms.DateInput):
+        input_type = 'date'
+    from_date = forms.DateField(widget=DateInput)
+    no_of_leaves = forms.IntegerField()
+
+
 class CLSAddForm(forms.ModelForm):
     class Meta:
         model = CLS
