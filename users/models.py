@@ -24,6 +24,7 @@ class CustomUser(AbstractUser):
     '''
     email = models.EmailField(_('email address'), unique=True)
     sid = models.IntegerField(_('sid'))
+    ccl_left = models.IntegerField(_('ccl_left'))
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email", "sid"]
