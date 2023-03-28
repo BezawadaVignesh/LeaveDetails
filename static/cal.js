@@ -35,7 +35,21 @@ generateCalendar = (month, year) => {
         let day = document.createElement('div')
         if (i >= first_day.getDay()) {
             day.classList.add('calendar-day-hover')
-            day.innerHTML = i - first_day.getDay() + 1
+            let flag = false
+            let msg = 'No desc'
+            for(var s in h_list){
+                sd = h_list[s][0].split('-')
+                if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {
+                    day.classList.add('h-date')
+                    flag = true
+                    msg = h_list[s][1]
+                }
+            }
+            //day.innerHTML = '<div class="tooltip">'+(i - first_day.getDay() + 1)+'<span class="tooltiptext">Tooltip text</span></div>'
+            if (flag){
+            day.innerHTML = "<a title='"+msg+"'>"+(i - first_day.getDay() + 1)+"</a>"
+            }
+            else{day.innerHTML =(i - first_day.getDay() + 1)}
             day.innerHTML += `<span></span>
                             <span></span>
                             <span></span>
@@ -43,6 +57,7 @@ generateCalendar = (month, year) => {
             if (i - first_day.getDay() + 1 === currDate.getDate() && year === currDate.getFullYear() && month === currDate.getMonth()) {
                 day.classList.add('curr-date')
             }
+
             for(var s in cls_list){
                 sd = cls_list[s].split('-')
                 if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {

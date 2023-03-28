@@ -2,15 +2,23 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block nav_content %}
-    <li class="nav-item">
-      <a class="nav-link" href="{% url  'home' %}">Home </a>
-    </li>
-    <li class="nav-item">
-      <a class="nav-link" href="{% url 'view_self' %}?sid={{ user.sid }}">View self</a>
-    </li>
     <li class="nav-item active">
-      <a class="nav-link" href="{% url 'remove_leave' %}?sid={{ user.sid }}">Remove Leaves <span class="sr-only">(current)</span></a>
-    </li>
+    <a class="nav-link" href="{% url 'home' %}">Home </a>
+</li>
+<li class="nav-item dropdown active">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+       aria-expanded="false">
+        Self <span class="sr-only">(current)</span>
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="{% url 'profile' %}?sid={{user.sid}}">Profile</a>
+        <a class="dropdown-item" href="{% url 'add_leave' %}?sid={{user.sid}}">Add</a>
+        <a class="dropdown-item" href="{% url 'remove_leave' %}?sid={{user.sid}}">Remove</a>
+    </div>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'search_sid' %}">Others</a>
+</li>
 {% endblock nav_content %}
 {% block content %}
 
@@ -90,6 +98,7 @@
 <script>
 let str = `{{data|safe}}`
 let data = JSON.parse(str)
+let h_list = data["h_list"]
 let cls_list = data["cls_list"]
 let ccls_list = data["ccls_list"]
 let sls_list = data["sls_list"]

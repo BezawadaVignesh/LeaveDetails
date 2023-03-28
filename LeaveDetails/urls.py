@@ -27,7 +27,11 @@ urlpatterns = [
     path('users/login/', auth_views.LoginView.as_view(template_name='users/login.html'), name='login'),
     path('users/logout/', auth_views.LogoutView.as_view(template_name='users/logout.html'), name='logout'),
     path('', user_views.home, name='home'),
-    path('view_self/', user_views.view_self, name='view_self'),
+    path('remove_holiday', user_views.holiday_delete, name='remove_holiday'),
+    path('profile/', user_views.profile, name='profile'),
+    path('profile_edit/', user_views.profile_edit, name='profile_edit'),
+    path('searchSID/', user_views.search_sid, name='search_sid'),
+    path('add_leave/', user_views.view_self, name='add_leave'),
     path('remove_leave/', user_views.remove_leave, name='remove_leave'),
 ] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 

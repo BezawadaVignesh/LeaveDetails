@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, CLS, CCLS, SLS
+from .models import CustomUser, CLS, CCLS, SLS, Profile, Holidays
 
 
 class CustomUserAdmin(UserAdmin):
@@ -57,3 +57,7 @@ class SLSAdmin(admin.ModelAdmin):
 
     search_fields = ('user', 'on_date',)
     ordering = ('on_date', 'user',)
+
+
+admin.site.register(Profile)
+admin.site.register(Holidays)

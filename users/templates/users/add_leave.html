@@ -2,16 +2,13 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block nav_content %}
-<li class="nav-item active">
-    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+    <li class="nav-item ">
+    <a class="nav-link" href="{% url 'home' %}">Home</a>
 </li>
-<li class="nav-item ">
-    <a class="nav-link" href="{% url 'remove_holiday' %}">Remove Holiday<span class="sr-only">(current)</span></a>
-</li>
-<li class="nav-item dropdown">
+<li class="nav-item dropdown active">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
        aria-expanded="false">
-        Self
+        Self <span class="sr-only">(current)</span>
     </a>
     <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
         <a class="dropdown-item" href="{% url 'profile' %}?sid={{user.sid}}">Profile</a>
@@ -22,14 +19,15 @@
 <li class="nav-item">
     <a class="nav-link" href="{% url 'search_sid' %}">Others</a>
 </li>
-
 {% endblock nav_content %}
 {% block content %}
+
 <div class="d-md-flex  ">
 
     <div class="col-md-6 ">
 
         <div class="cal-container">
+            <h2>Details of {{ur.sid}}</h2>
             <div class="calendar">
                 <div class="calendar-header">
                     <span class="month-picker" id="month-picker">April</span>
@@ -63,16 +61,17 @@
     <div class="col-md-6 ">
         <div class="leave-add-form">
             <div class="cont">
-                <form method="POST">
-                    {% csrf_token %}
-                    <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Add Holidays</legend>
-                        {{ form|crispy }}
-                    </fieldset>
-                    <div class="form-group">
-                        <button class="btn btn-outline-info button-bg-color" type="submit">Add</button>
-                    </div>
-                </form>
+            <p>CLS left : {{cls_left}}</p>
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">ADD leaves</legend>
+                    {{ l_form|crispy }}
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info button-bg-color" type="submit">Add</button>
+                </div>
+            </form>
             </div>
         </div>
     </div>
@@ -94,15 +93,17 @@
     background-color: var(--bg-body);
 }
 
-
 </style>
+
 <script>
 let str = `{{data|safe}}`
 let data = JSON.parse(str)
 let h_list = data["h_list"]
-let cls_list = []//data["cls_list"]
-let ccls_list = []//data["ccls_list"]
-let sls_list = []//data["sls_list"]
+let cls_list = data["cls_list"]
+let ccls_list = data["ccls_list"]
+let sls_list = data["sls_list"]
+
+
 
 </script>
 <script src="{% static 'cal.js' %}"></script>

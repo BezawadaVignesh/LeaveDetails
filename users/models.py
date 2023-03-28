@@ -1,30 +1,15 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
 from django.utils.translation import gettext_lazy as _
+from PIL import Image
 
 from .managers import CustomUserManager
 
 
 class CustomUser(AbstractUser):
-    # username = None
-    '''
-    Base class definition for username
-    username = models.CharField(
-        _("username"),
-        max_length=150,
-        unique=True,
-        help_text=_(
-            "Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only."
-        ),
-        validators=[username_validator],
-        error_messages={
-            "unique": _("A user with that username already exists."),
-        },
-    )
-    '''
     email = models.EmailField(_('email address'), unique=True)
     sid = models.IntegerField(_('sid'))
-    ccl_left = models.IntegerField(_('ccl_left'))
+    ccl_left = models.IntegerField(_('ccl_left'), null=True)
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
     REQUIRED_FIELDS = ["email", "sid"]
@@ -33,6 +18,29 @@ class CustomUser(AbstractUser):
 
     def __str__(self):
         return self.username
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(CustomUser, on_delete=models.CASCADE)
+    name = models.CharField(max_length=100)
+    designation = models.CharField(max_length=50)
+    department = models.CharField(max_length=10)
+    ccl_left = models.FloatField(default=0)
+
+    image = models.ImageField(default='default.jpg', upload_to='profile_pics')
+
+    def __str__(self):
+        return f'{self.user.username} Profile'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+
+        img = Image.open(self.image.path)
+
+        if img.height > 300 or img.width > 300:
+            output_size = (300, 300)
+            img.thumbnail(output_size)
+            img.save(self.image.path)
 
 
 class CLS(models.Model):
@@ -48,3 +56,8 @@ class CCLS(models.Model):
 class SLS(models.Model):
     user = models.ForeignKey(CustomUser, related_name="sls", on_delete=models.CASCADE)
     on_date = models.DateField()
+
+
+class Holidays(models.Model):
+    on_date = models.DateField()
+    desc = models.CharField(max_length=200)

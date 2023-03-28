@@ -2,11 +2,11 @@
 {% load static %}
 {% load crispy_forms_tags %}
 {% block nav_content %}
-<li class="nav-item active">
-    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'home' %}">Home</a>
 </li>
-<li class="nav-item ">
-    <a class="nav-link" href="{% url 'remove_holiday' %}">Remove Holiday<span class="sr-only">(current)</span></a>
+<li class="nav-item active">
+    <a class="nav-link" href="#">Remove Holiday<span class="sr-only">(current)</span></a>
 </li>
 <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
@@ -66,11 +66,11 @@
                 <form method="POST">
                     {% csrf_token %}
                     <fieldset class="form-group">
-                        <legend class="border-bottom mb-4">Add Holidays</legend>
+                        <legend class="border-bottom mb-4">Remove Holidays</legend>
                         {{ form|crispy }}
                     </fieldset>
                     <div class="form-group">
-                        <button class="btn btn-outline-info button-bg-color" type="submit">Add</button>
+                        <button class="btn btn-outline-info button-bg-color" type="submit">Remove</button>
                     </div>
                 </form>
             </div>

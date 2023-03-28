@@ -14,7 +14,9 @@
     --clleaves : #E54111;
     --cclleaves : #12E95D;
     --slleaves : #F464C4;
+    --hleaves : #CBD8D8;
     --white: #fff;
+    --black: #000;
     --shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
     --font -family: cursive;
 }
@@ -162,6 +164,13 @@
 
 .calendar-days div:hover span:nth-child(4) {
     transition-delay: 0.6s;
+}
+
+.calendar-days div.h-date,
+.calendar-days div.h-date:hover {
+    background-color: var(--hleaves);
+    color: var(--black);
+    border-radius: 50%;
 }
 
 .calendar-days div.curr-date,
