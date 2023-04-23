@@ -1,0 +1,116 @@
+{% extends "users/homebase.html" %}
+{% load static %}
+{% load crispy_forms_tags %}
+{% block nav_content %}
+<li class="nav-item active">
+    <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item ">
+    <a class="nav-link" href="{% url 'remove_holiday' %}">Remove Holiday<span class="sr-only">(current)</span></a>
+</li>
+<li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true"
+       aria-expanded="false">
+        Self
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+        <a class="dropdown-item" href="{% url 'profile' %}?sid={{user.sid}}">Profile</a>
+        <a class="dropdown-item" href="{% url 'add_leave' %}?sid={{user.sid}}">Add</a>
+        <a class="dropdown-item" href="{% url 'remove_leave' %}?sid={{user.sid}}">Remove</a>
+    </div>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'search_sid' %}">Search SID</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
+</li>
+
+{% endblock nav_content %}
+{% block content %}
+<div class="d-md-flex  ">
+
+    <div class="col-md-6 ">
+
+        <div class="cal-container">
+            <div class="calendar">
+                <div class="calendar-header">
+                    <span class="month-picker" id="month-picker">April</span>
+                    <div class="year-picker">
+                        <span class="year-change" id="prev-year">
+                            <pre><</pre>
+                        </span>
+                        <span id="year">2022</span>
+                        <span class="year-change" id="next-year">
+                            <pre>></pre>
+                        </span>
+                    </div>
+                </div>
+                <div class="calendar-body">
+                    <div class="calendar-week-day">
+                        <div>Sun</div>
+                        <div>Mon</div>
+                        <div>Tue</div>
+                        <div>Wed</div>
+                        <div>Thu</div>
+                        <div>Fri</div>
+                        <div>Sat</div>
+                    </div>
+                    <div class="calendar-days"></div>
+                </div>
+
+                <div class="month-list"></div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6 ">
+        <div class="leave-add-form">
+            <div class="cont">
+                <form method="POST">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <legend class="border-bottom mb-4">Add Holidays</legend>
+                        {{ form|crispy }}
+                    </fieldset>
+                    <div class="form-group">
+                        <button class="btn btn-outline-info button-bg-color" type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<link rel="stylesheet" href="{% static 'cal.css' %}">
+<style>
+    .cont {
+        width: 350px;
+    }
+    .leave-add-form {
+    height:100%
+    background-color:
+    display: grid;
+    place-items: center;
+
+
+    font-family: var(--font-family);
+    background-color: var(--bg-body);
+}
+
+
+</style>
+<script>
+let str = `{{data|safe}}`
+let data = JSON.parse(str)
+let h_list = data["h_list"]
+let cls_list = []//data["cls_list"]
+let ccls_list = []//data["ccls_list"]
+let sls_list = []//data["sls_list"]
+let h_cls_list = []//data["h_cls_list"]
+let h_ccls_list = []//data["h_ccls_list"]
+let h_sls_list = []//data["h_sls_list"]
+let epl_list = []//data["epl_list"]
+let h_epl_list = []//data["h_epl_list"]
+</script>
+<script src="{% static 'cal.js' %}"></script>
+{% endblock content %}
