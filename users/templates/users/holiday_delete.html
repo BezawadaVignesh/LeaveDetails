@@ -20,7 +20,10 @@
     </div>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{% url 'search_sid' %}">Others</a>
+    <a class="nav-link" href="{% url 'search_sid' %}">Search SID</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
 </li>
 
 {% endblock nav_content %}
@@ -103,6 +106,8 @@ let h_list = data["h_list"]
 let cls_list = []//data["cls_list"]
 let ccls_list = []//data["ccls_list"]
 let sls_list = []//data["sls_list"]
+let epl_list = []
+let h_epl_list = []
 
 </script>
 <script src="{% static 'cal.js' %}"></script>

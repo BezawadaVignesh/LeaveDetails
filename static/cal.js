@@ -2,6 +2,17 @@ let calendar = document.querySelector('.calendar')
 
 const month_names = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
+function setDate(s){
+    n = s.split("-")
+    date = (new Date(n[0], Number(n[1])-1, Number(n[2])+1)).toISOString().substring(0,10)
+    if(!document.getElementById('id_from_date').value){
+        document.getElementById('id_from_date').value = date;
+
+        }
+    else
+        document.getElementById('id_to_date').value = date;
+}
+
 isLeapYear = (year) => {
     return (year % 4 === 0 && year % 100 !== 0 && year % 400 !== 0) || (year % 100 === 0 && year % 400 ===0)
 }
@@ -47,9 +58,16 @@ generateCalendar = (month, year) => {
             }
             //day.innerHTML = '<div class="tooltip">'+(i - first_day.getDay() + 1)+'<span class="tooltiptext">Tooltip text</span></div>'
             if (flag){
-            day.innerHTML = "<a title='"+msg+"'>"+(i - first_day.getDay() + 1)+"</a>"
+            day.innerHTML = "<button title='"+msg+"' style='border: none;background:transparent' onclick="+
+            "setDate('"+year +"-"+ (month+1)+ "-" + (i - first_day.getDay() + 1) +"') ) >"
+            +(i - first_day.getDay() + 1)+"</button>"
             }
-            else{day.innerHTML =(i - first_day.getDay() + 1)}
+            else{
+            day.innerHTML = "<button style='border: none;background:transparent' onclick="+
+            "setDate('"+year +"-"+ (month+1)+ "-" + (i - first_day.getDay() + 1) +"') ) >"+
+            (i - first_day.getDay() + 1)+"</button>"
+
+            }
             day.innerHTML += `<span></span>
                             <span></span>
                             <span></span>
@@ -62,17 +80,54 @@ generateCalendar = (month, year) => {
                 sd = cls_list[s].split('-')
                 if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {
                     day.classList.add('cl-date')
+                    break
                 }
             }
             for(var s in ccls_list){
                 sd = ccls_list[s].split('-')
                 if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {
                     day.classList.add('ccl-date')
+                    break
                 }
             }for(var s in sls_list){
                 sd = sls_list[s].split('-')
                 if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {
                     day.classList.add('sl-date')
+                    break
+                }
+            }
+            for(var s in h_cls_list){
+                sd = h_cls_list[s].split('-')
+                if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {
+                    day.classList.add('h_cl-date')
+                    break
+                }
+            }
+            for(var s in h_ccls_list){
+                sd = h_ccls_list[s].split('-')
+                if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {
+                    day.classList.add('h_ccl-date')
+                    break
+                }
+            }for(var s in h_sls_list){
+                sd = h_sls_list[s].split('-')
+                if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {
+                    day.classList.add('h_sl-date')
+                    break
+                }
+            }
+            for(var s in epl_list){
+                sd = epl_list[s].split('-')
+                if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {
+                    day.classList.add('epl-date')
+                    break
+                }
+            }
+            for(var s in h_epl_list){
+                sd = h_epl_list[s].split('-')
+                if (i - first_day.getDay()+1  === parseInt(sd[2], 10) && year === parseInt(sd[0], 10) && month+1 === parseInt(sd[1], 10)) {
+                    day.classList.add('h_epl-date')
+                    break
                 }
             }
 

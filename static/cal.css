@@ -14,6 +14,11 @@
     --clleaves : #E54111;
     --cclleaves : #12E95D;
     --slleaves : #F464C4;
+    --eplleaves : #FF00AA;
+    --h_eplleaves : #FF00AA87;
+    --h_clleaves : #E5411187;
+    --h_cclleaves : #12E95D87;
+    --h_slleaves : #F464C487;
     --hleaves : #CBD8D8;
     --white: #fff;
     --black: #000;
@@ -194,7 +199,40 @@
 }
 .calendar-days div.sl-date,
 .calendar-days div.sl-date:hover {
+    background-color: var(--h_slleaves);
+    color: var(--white);
+    border-radius: 50%;
+}
+
+.calendar-days div.h_cl-date,
+.calendar-days div.h_cl-date:hover {
+    background-color: var(--h_clleaves);
+    color: var(--white);
+    border-radius: 50%;
+}
+.calendar-days div.h_ccl-date,
+.calendar-days div.h_ccl-date:hover {
+    background-color: var(--h_cclleaves);
+    color: var(--white);
+    border-radius: 50%;
+}
+.calendar-days div.sl-date,
+.calendar-days div.sl-date:hover {
     background-color: var(--slleaves);
+    color: var(--white);
+    border-radius: 50%;
+}
+
+.calendar-days div.epl-date,
+.calendar-days div.epl-date:hover {
+    background-color: var(--eplleaves);
+    color: var(--white);
+    border-radius: 50%;
+}
+
+.calendar-days div.h_epl-date,
+.calendar-days div.h_epl-date:hover {
+    background-color: var(--h_eplleaves);
     color: var(--white);
     border-radius: 50%;
 }

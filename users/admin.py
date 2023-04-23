@@ -2,7 +2,7 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 
 from .forms import CustomUserCreationForm, CustomUserChangeForm
-from .models import CustomUser, CLS, CCLS, SLS, Profile, Holidays
+from .models import CustomUser, CLS, CCLS, SLS, Profile, Holidays, EPLS
 
 
 class CustomUserAdmin(UserAdmin):
@@ -34,7 +34,7 @@ admin.site.register(CustomUser, CustomUserAdmin)
 
 @admin.register(CLS)
 class CLSAdmin(admin.ModelAdmin):
-    list_display = ('user', 'on_date')
+    list_display = ('user', 'on_date', 'half')
     list_filter = ('on_date', 'user',)
 
     search_fields = ('user', 'on_date',)
@@ -43,7 +43,7 @@ class CLSAdmin(admin.ModelAdmin):
 
 @admin.register(CCLS)
 class CCLSAdmin(admin.ModelAdmin):
-    list_display = ('user', 'on_date')
+    list_display = ('user', 'on_date', 'half')
     list_filter = ('on_date', 'user',)
 
     search_fields = ('user', 'on_date',)
@@ -52,7 +52,16 @@ class CCLSAdmin(admin.ModelAdmin):
 
 @admin.register(SLS)
 class SLSAdmin(admin.ModelAdmin):
-    list_display = ('user', 'on_date')
+    list_display = ('user', 'on_date', 'half')
+    list_filter = ('on_date', 'user',)
+
+    search_fields = ('user', 'on_date',)
+    ordering = ('on_date', 'user',)
+
+
+@admin.register(EPLS)
+class CLSAdmin(admin.ModelAdmin):
+    list_display = ('user', 'on_date', 'half')
     list_filter = ('on_date', 'user',)
 
     search_fields = ('user', 'on_date',)

@@ -18,9 +18,11 @@
         <a class="dropdown-item" href="{% url 'add_leave' %}?sid={{user.sid}}">Add</a>
         <a class="dropdown-item" href="{% url 'remove_leave' %}?sid={{user.sid}}">Remove</a>
     </div>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'search_sid' %}">Search SID</a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{% url 'search_sid' %}">Others</a>
+    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
 </li>
 
 {% endblock nav_content %}
@@ -135,7 +137,7 @@
                         <p class="mb-0">CCLs</p>
                     </div>
                     <div class="col-sm-8">
-                        <p class="text-muted mb-0">{{ccls_left}}</p>
+                        <p class="text-muted mb-0">{{user.profile.ccl_left}}</p>
                     </div>
                 </div>
                 <hr>
@@ -144,7 +146,16 @@
                         <p class="mb-0">HPLs</p>
                     </div>
                     <div class="col-sm-8">
-                        <p class="text-muted mb-0">{{sls_left}}</p>
+                        <p class="text-muted mb-0">{{user.profile.ssl_left}}</p>
+                    </div>
+                </div>
+                <hr>
+                <div class="row">
+                    <div class="col-sm-4">
+                        <p class="mb-0">EPLs</p>
+                    </div>
+                    <div class="col-sm-8">
+                        <p class="text-muted mb-0">{{user.profile.epl_left}}</p>
                     </div>
                 </div>
                 <br>
@@ -186,9 +197,11 @@ let h_list = data["h_list"]
 let cls_list = data["cls_list"]
 let ccls_list = data["ccls_list"]
 let sls_list = data["sls_list"]
-
-
-
+let h_cls_list = data["h_cl_list"]
+let h_ccls_list = data["h_ccl_list"]
+let h_sls_list = data["h_sl_list"]
+let epl_list = data["epl_list"]
+let h_epl_list = data["h_epl_list"]
 
 </script>
 <script src="{% static 'cal.js' %}"></script>

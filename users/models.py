@@ -8,7 +8,7 @@ from .managers import CustomUserManager
 
 class CustomUser(AbstractUser):
     email = models.EmailField(_('email address'), unique=True)
-    sid = models.IntegerField(_('sid'))
+    sid = models.CharField(_('sid'), max_length=10)
     ccl_left = models.IntegerField(_('ccl_left'), null=True)
     EMAIL_FIELD = "email"
     USERNAME_FIELD = "username"
@@ -26,6 +26,8 @@ class Profile(models.Model):
     designation = models.CharField(max_length=50)
     department = models.CharField(max_length=10)
     ccl_left = models.FloatField(default=0)
+    ssl_left = models.FloatField(default=0)  # also know as HPl leaves
+    epl_left = models.FloatField(default=0)
 
     image = models.ImageField(default='default.jpg', upload_to='profile_pics')
 
@@ -45,16 +47,25 @@ class Profile(models.Model):
 
 class CLS(models.Model):
     user = models.ForeignKey(CustomUser, related_name="cls", on_delete=models.CASCADE)
+    half = models.BooleanField(default=False)
     on_date = models.DateField()
 
 
 class CCLS(models.Model):
     user = models.ForeignKey(CustomUser, related_name="ccls", on_delete=models.CASCADE)
+    half = models.BooleanField(default=False)
     on_date = models.DateField()
 
 
 class SLS(models.Model):
     user = models.ForeignKey(CustomUser, related_name="sls", on_delete=models.CASCADE)
+    half = models.BooleanField(default=False)
+    on_date = models.DateField()
+
+
+class EPLS(models.Model):
+    user = models.ForeignKey(CustomUser, related_name="epls", on_delete=models.CASCADE)
+    half = models.BooleanField(default=False)
     on_date = models.DateField()
 
 

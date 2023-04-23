@@ -1,21 +1,133 @@
 {% extends "users/base.html" %}
 {% load crispy_forms_tags %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Join Today</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+<div class="container">
+
+    <div class="row justify-content-center">
+        <div class="col-8">
+            <div class="content-section">
+                <h1>Register</h1>
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <fieldset class="form-group">
+                        <div id="div_id_username" class="mb-3"><label for="id_username"
+                                                                      class="form-label requiredField">
+                            Username<span class="asteriskField">*</span> </label>
+                            <input type="text" name="username"
+                                   maxlength="150" autofocus
+                                   class="textinput form-control"
+                                   required id="id_username">
+
+                        </div>
+                        <div id="div_id_sid" class="mb-3"><label for="id_sid" class="form-label requiredField">
+                            Sid<span class="asteriskField">*</span> </label>
+                            <input type="text" name="sid"
+                                   maxlength="10"
+                                   class="textinput form-control"
+                                   required id="id_sid"></div>
+                        <div id="div_id_email" class="mb-3"><label for="id_email" class="form-label requiredField">
+                            Email<span class="asteriskField">*</span> </label>
+                            <input type="email" name="email"
+                                   class="emailinput form-control"
+                                   required id="id_email"></div>
+                        <div class="form-row" >
+                            <div id="div_id_first_name" class="form-group " style="width: 50%;">
+                                <label for="id_first_name" class="form-label">
+                                    First name
+                                </label>
+                                <input type="text" name="first_name" maxlength="150" class="textinput form-control"
+                                       id="id_first_name">
+                            </div>
+                            <div id="div_id_last_name" class="form-group " style="width: 50%;">
+                                <label for="id_last_name" class="form-label">
+                                    Last name
+                                </label>
+                                <input type="text" name="last_name" maxlength="150" class="textinput form-control"
+                                       id="id_last_name">
+                            </div>
+                        </div>
+                        <div id="div_id_password1" class="mb-3"><label for="id_password1"
+                                                                       class="form-label requiredField">
+                            Password<span class="asteriskField">*</span> </label>
+                            <input type="password"
+                                   name="password1"
+                                   autocomplete="new-password"
+                                   class="passwordinput form-control"
+                                   required id="id_password1">
+
+                        </div>
+                        <div id="div_id_password2" class="mb-3">
+                            <label for="id_password2"
+                                   class="form-label requiredField">
+                                Password confirmation<span class="asteriskField">*</span>
+                            </label> <input type="password"
+                                            name="password2"
+                                            autocomplete="new-password"
+                                            class="passwordinput form-control"
+                                            required
+                                            id="id_password2">
+
+                        </div>
+
+
+                        <div id="div_id_name" class="mb-3"><label for="id_name" class="form-label requiredField">
+                            Name<span class="asteriskField">*</span> </label>
+                            <input type="text" name="name"
+                                   maxlength="100"
+                                   class="textinput form-control"
+                                   required id="id_name"></div>
+                        <div id="div_id_designation" class="mb-3">
+                            <label for="id_designation"
+                                   class="form-label requiredField">
+                                Designation<span class="asteriskField">*</span> </label>
+                            <input type="text"
+                                   name="designation"
+                                   maxlength="50"
+                                   class="textinput form-control"
+                                   required
+                                   id="id_designation">
+                        </div>
+                        <div id="div_id_department" class="mb-3"><label for="id_department"
+                                                                        class="form-label requiredField">
+                            Department<span class="asteriskField">*</span> </label>
+                            <input type="text" name="department"
+                                   maxlength="10"
+                                   class="textinput form-control"
+                                   required id="id_department">
+                        </div>
+                        <div id="div_id_ccl_left" class="mb-3"><label for="id_ccl_left"
+                                                                      class="form-label requiredField">
+                            Ccl left<span class="asteriskField">*</span> </label> <input type="number" name="ccl_left"
+                                                                                         value="0" step="any"
+                                                                                         class="numberinput form-control"
+                                                                                         required id="id_ccl_left">
+                        </div>
+                        <div id="div_id_ssl_left" class="mb-3"><label for="id_ssl_left"
+                                                                      class="form-label requiredField">
+                            HPL left<span class="asteriskField">*</span> </label> <input type="number" name="ssl_left"
+                                                                                         value="0" step="any"
+                                                                                         class="numberinput form-control"
+                                                                                         required id="id_ssl_left">
+                        </div>
+                        <div id="div_id_epl_left" class="mb-3"><label for="id_epl_left"
+                                                                      class="form-label requiredField">
+                            EPL left<span class="asteriskField">*</span> </label> <input type="number" name="epl_left"
+                                                                                         value="0" step="any"
+                                                                                         class="numberinput form-control"
+                                                                                         required id="id_epl_left">
+                        </div>
+                        <div id="div_id_image" class="mb-3">
+
+                    </fieldset>
+                    <div class="form-group" style="display: flex;justify-content: space-between;">
+                        <button class="btn btn-outline-info" type="submit">Submit</button>
+
+                    </div>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already Have An Account? <a class="ml-2" href="{% url 'login' %}">Sign In</a>
-            </small>
         </div>
     </div>
+    </form>
+</div>
+
+
 {% endblock content %}

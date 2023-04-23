@@ -17,17 +17,15 @@
     </div>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{% url 'search_sid' %}">Others</a>
+    <a class="nav-link" href="{% url 'search_sid' %}">Search SID</a>
+</li>
+<li class="nav-item">
+    <a class="nav-link" href="{% url 'logout' %}">Logout</a>
 </li>
 {% endblock nav_content %}
 {% block content %}
-
-<div class="d-md-flex  ">
-
-    <div class="col-md-6 ">
-
-        <div class="cal-container">
-            <h2>Details of {{ur.sid}}</h2>
+<div class="cal-container">
+            <h2>Details of {{user.sid}}</h2>
             <div class="calendar">
                 <div class="calendar-header">
                     <span class="month-picker" id="month-picker">April</span>
@@ -57,28 +55,103 @@
                 <div class="month-list"></div>
             </div>
         </div>
-    </div>
-    <div class="col-md-6 ">
-        <div class="leave-add-form">
-            <div class="cont">
-            <p>CLS left : {{cls_left}}</p>
-            <form method="POST">
-                {% csrf_token %}
-                <fieldset class="form-group">
-                    <legend class="border-bottom mb-4">ADD leaves</legend>
-                    {{ l_form|crispy }}
-                </fieldset>
-                <div class="form-group">
-                    <button class="btn btn-outline-info button-bg-color" type="submit">Add</button>
+<div class="d-md-flex  ">
+
+<div class="col-md-6 " >
+    <div class="card " style="">
+        <div class="card-body">
+            <p class="mb-4">Leaves Left</p>
+
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="mb-0">CLs</p>
                 </div>
-            </form>
+                <div class="col-sm-8">
+                    <p class="text-muted mb-0">{{cls_left}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="mb-0">CCLs</p>
+                </div>
+                <div class="col-sm-8">
+                    <p class="text-muted mb-0">{{user.profile.ccl_left}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="mb-0">HPLs</p>
+                </div>
+                <div class="col-sm-8">
+                    <p class="text-muted mb-0">{{user.profile.ssl_left}}</p>
+                </div>
+            </div>
+            <hr>
+            <div class="row">
+                <div class="col-sm-4">
+                    <p class="mb-0">EPLs</p>
+                </div>
+                <div class="col-sm-8">
+                    <p class="text-muted mb-0">{{user.profile.epl_left}}</p>
+                </div>
             </div>
         </div>
     </div>
 </div>
 
+<div class="col-md-6 ">
+    <div class="leave-add-form">
+            <div class="cont">
+
+            <form method="POST">
+                {% csrf_token %}
+                <fieldset class="form-group">
+                    <legend class="border-bottom mb-4">ADD leaves</legend>
+
+                    <div class="d-md-flex  " >
+                        <div style="padding:10px;padding-right:20px">
+                            From Date:
+                            {{ l_form.from_date }}
+                        </div>
+                        <div style="padding:10px">
+                            To Date:
+                            {{ l_form.to_date }}
+                        </div>
+                    </div>
+
+                    <!--div class="d-md-flex  " -->
+                        <div style="width:100%;padding:10px">
+                            Duration:
+                            {{ l_form.half }}
+                        </div>
+                        <div style="width:100%;padding:10px">
+                            Type:
+                            {{ l_form.Type }}
+                        </div>
+                    <!--/div-->
+                </fieldset>
+                <div class="form-group">
+                    <button class="btn btn-outline-info button-bg-color" type="submit">Add</button>
+                    <a class=" btn btn-outline-info" href="{% url 'profile' %}?sid={{user.sid}}">Back</a>
+                </div>
+            </form>
+            </div>
+        </div>
+</div>
+
+</div>
+
 <link rel="stylesheet" href="{% static 'cal.css' %}">
 <style>
+.l_details{
+@media screen and (min-width: 800px) {
+  top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+}
     .cont {
         width: 350px;
     }
@@ -102,9 +175,12 @@ let h_list = data["h_list"]
 let cls_list = data["cls_list"]
 let ccls_list = data["ccls_list"]
 let sls_list = data["sls_list"]
-
-
-
+let h_cls_list = data["h_cl_list"]
+let h_ccls_list = data["h_ccl_list"]
+let h_sls_list = data["h_sl_list"]
+let epl_list = data["epl_list"]
+let h_epl_list = data["h_epl_list"]
 </script>
+
 <script src="{% static 'cal.js' %}"></script>
 {% endblock content %}
